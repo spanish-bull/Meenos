@@ -1,0 +1,45 @@
+version: '3.1'
+services:
+  web:
+    image: nginx
+    depends_on:
+      - php
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./html:/code
+    ports:
+      - "80:80"
+  php:
+    build:
+      context: php-fpm
+    depends_on:
+      - database
+    volumes:
+      - ./html:/code
+  composer:
+    image: 'composer:latest'
+    volumes:
+      - './html:/app'
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+  database:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=meenos
+      - MYSQL_USER=JeDaTh
+      - MYSQL_PASSWORD=azerty
+  adminer-nginx:
+    image: adminer
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=database
+      - ADMINER_DESIGN=brade

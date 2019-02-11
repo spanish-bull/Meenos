@@ -1,0 +1,6 @@
+### Symfony ###
+/html/.env
+/html/public/bundles/
+/html/var/
+/html/vendor/
+/.idea
