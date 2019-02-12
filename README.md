@@ -14,9 +14,10 @@ Rendu : 15 février à 23h59
 docker-compose up -d
 
 **Etape 2 :**
-renommer le .env-dist en .env\
-changer les champs login, pwd, database_name\
-DATABASE_URL=mysql://{login}:{pwd}@database:3306/{database_name}
+dupliquez le .env-dist en .env\
+changez les champs login, pwd, database_name\
+
+`DATABASE_URL=mysql://{login}:{pwd}@database:3306/{database_name}`
 
 **Etape 3 :**
 docker-compose run composer composer install
