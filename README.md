@@ -14,11 +14,12 @@ Rendu : 15 février à 23h59
 docker-compose up -d
 
 **Etape 2 :**
-docker-compose run composer composer install
+renommer le .env-dist en .env\
+changer les champs login, pwd, database_name\
+DATABASE_URL=mysql://{login}:{pwd}@database:3306/{database_name}
 
 **Etape 3 :**
-modifier le .env
-DATABASE_URL=mysql://root:root@database:3306/meenos
+docker-compose run composer composer install
 
 ## Accès
 **Site :**
