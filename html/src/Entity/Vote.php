@@ -24,11 +24,6 @@ class Vote
     private $conference;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $rating;
@@ -37,6 +32,12 @@ class Vote
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="votes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -75,31 +76,6 @@ class Vote
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
-        }
-
-        return $this;
-    }
 
     public function getRating(): ?int
     {
@@ -121,6 +97,18 @@ class Vote
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
