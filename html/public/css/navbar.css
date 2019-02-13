@@ -18,7 +18,13 @@ a {
     border-color: var(--mn-red);
 }
 .btn-outline-success:hover {
-    color: #fff;
     background-color: var(--mn-red);
     border-color: var(--mn-red);
+}
+.btn-outline-success:active {
+    background-color: var(--mn-red);
+    border-color: var(--mn-red);
+}
+.btn-outline-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(167, 40, 40, 0.5);
 }
