@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Conference;
+use App\Entity\Tag;
 use App\Entity\User;
+use App\Form\AddConferenceType;
+use App\Form\AddTagType;
 use App\Form\LoginUserType;
 use App\Form\RegisterUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class SecurityController extends AbstractController
 {
@@ -41,6 +46,63 @@ class SecurityController extends AbstractController
         $form = $this->createForm(LoginUserType::class, $user);
         return $this->render('security/login.html.twig', ['error' => $authenticationUtils->getLastAuthenticationError(), 'form' => $form->createView()]);
     }
+    /**
+    * @Route("/admin/addconference", name="addConference")
+    */
+    public function addConference(Request $request)
+    {
+        $conference = new Conference();
+        $form = $this->createForm(AddConferenceType::class,$conference);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var Symfony\Component\HttpFoundation\File\UploadedFile $file
+             */
+            $file = $form->get('image')->getData();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessClientExtension();
+            try {
+                $file->move(
+                    $this->getParameter('images'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            $conference->setTags($form->get('tags')->getData());
+            $conference->setImage($fileName);
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($conference);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('security/addconference.html.twig', ['form' => $form->createView()]);
+
+    }
+    /**
+     * @Route("/admin/addtag", name="addTag")
+     */
+    public function addTag(Request $request)
+    {
+        $tag = new Tag();
+        $form = $this->createForm(AddTagType::class,$tag);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($tag);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('security/addTag.html.twig', ['form' => $form->createView()]);
+
+    }
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
+    }
 }

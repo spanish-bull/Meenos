@@ -36,7 +36,8 @@ class Conference
     private $summary;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\File(mimeTypes = {"image/jpeg","image/jpg", "image/gif", "image/png"})
      */
     private $image;
 
@@ -151,7 +152,11 @@ class Conference
     {
         return $this->tags;
     }
-
+    public function setTags($tags): self
+    {
+        $this->addTag($tags);
+        return $this;
+    }
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
