@@ -1,0 +1,20 @@
+form input{
+    width:100%;
+    margin-bottom:15px;
+    border-radius:5px;
+}
+form label{
+    margin-top:10px;
+}
+#login_user_submit{
+    background-color: #C8071A;
+    color:white;
+    border:1px #C8071A solid;
+    border-radius:10px;
+    margin:0 33%;
+    width: 34%;
+}
+.form-control{
+    border:1px black solid;
+    border-raidus:15px;
+}

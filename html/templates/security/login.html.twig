@@ -1,21 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container">
+        {{ form_start(form, {'attr':{'class':'col-lg-4 offset-lg-4'}}) }}
+        {{ form_errors(form) }}
+        {{ form_label(form.username) }}
+        {{ form_errors(form.username) }}
+        {{ form_widget(form.username, {'attr':{'class':'form-control'}}) }}
+        {{ form_help(form.username) }}
+        {{ form_label(form.password) }}
+        {{ form_errors(form.password) }}
+        {{ form_widget(form.password, {'attr':{'class':'form-control'}}) }}
+        {{ form_help(form.password) }}
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_label(form.username) }}
-    {{ form_errors(form.username) }}
-    {{ form_widget(form.username) }}
-    {{ form_help(form.username) }}
-    {{ form_label(form.password) }}
-    {{ form_errors(form.password) }}
-    {{ form_widget(form.password) }}
-    {{ form_help(form.password) }}
+        {{ form_label(form.submit) }}
+        {{ form_widget(form.submit) }}
 
-    {{ form_label(form.submit) }}
-    {{ form_widget(form.submit) }}
+        {{ form_end(form) }}</div>
 
-    {{ form_end(form) }}
 
 {% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('/css/login.css') }}">{% endblock %}
