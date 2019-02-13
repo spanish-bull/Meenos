@@ -21,7 +21,9 @@ class User implements  UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
@@ -36,12 +38,12 @@ class User implements  UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
     /**
-     * @Assert\DateTime()
      * @ORM\Column(type="simple_array")
      */
     private $roles;
