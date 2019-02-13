@@ -8,6 +8,7 @@ a {
 }
 .navbar-title {
     height: 40px;
+    text-decoration: none;
 }
 .navbar-logo {
     width: 40px;
