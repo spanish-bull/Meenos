@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('/css/conference.css') }}">{% endblock %}
+
 {% block title %}{{ conference.title }}{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1>{{ conference.title }}</h1>
-    <div>
+    <h1 class="mb-4">{{ conference.title }}</h1>
+    <div class="d-flex bd-highlight justify-content-between mb-3">
         <div>{{ conference.date | date }}</div>
         {% if conference.address is not null %}
             <div>{{ conference.address }}</div>
