@@ -13,3 +13,12 @@ a {
     width: 40px;
     margin-left: 10px;
 }
+.btn-outline-success {
+    color: var(--mn-red);
+    border-color: var(--mn-red);
+}
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: var(--mn-red);
+    border-color: var(--mn-red);
+}
