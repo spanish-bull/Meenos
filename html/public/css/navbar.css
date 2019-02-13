@@ -5,6 +5,7 @@ a {
 .meenos-nav {
     background-color: white !important;
     box-shadow: 0px 0px 10px rgba(0, 0, 0,0.2);
+    margin-bottom: 30px;
 }
 .navbar-title {
     height: 40px;
