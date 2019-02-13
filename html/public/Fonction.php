@@ -90,7 +90,7 @@
         $(this).parent().attr('data-rating-value', $(this).data('rating-value'));
     });
 </script
-</html><?php
+</html> <?php
 /**
  * Created by PhpStorm.
  * User: whhhynd
