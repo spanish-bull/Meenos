@@ -5,7 +5,8 @@ a {
 .meenos-nav {
     background-color: white !important;
     box-shadow: 0px 0px 10px rgba(0, 0, 0,0.2);
-    margin-bottom: 30px;
+    position: fixed;
+    width: 100%;
 }
 .navbar-title {
     height: 40px;
@@ -16,10 +17,16 @@ a {
 }
 .btn-outline-success {
     color: var(--mn-red);
-    border-color: var(--mn-red);
+    border-color: var(--mn-red) !important;
 }
 .btn-outline-success:hover {
-    color: #fff;
-    background-color: var(--mn-red);
-    border-color: var(--mn-red);
+    background-color: var(--mn-red) !important;
+    border-color: var(--mn-red) !important;
+}
+.btn-outline-success:active {
+    background-color: var(--mn-red) !important;
+    border-color: var(--mn-red) !important;
+}
+.btn-outline-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(167, 40, 40, 0.5) !important;
 }
