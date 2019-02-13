@@ -6,7 +6,7 @@ security:
         our_db_provider:
             entity:
                 class: App\Entity\User
-                property: email
+                property: username
         in_memory: { memory: ~ }
     firewalls:
         dev:
@@ -18,7 +18,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                username_parameter: "login_user[email]"
+                username_parameter: "login_user[username]"
                 password_parameter: "login_user[password]"
             logout:
                 path:   /logout

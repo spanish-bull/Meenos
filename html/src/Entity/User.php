@@ -60,6 +60,7 @@ class User implements  UserInterface
 
     public function __construct()
     {
+        $this->roles = array('ROLE_USER');
         $this->votes = new ArrayCollection();
     }
 
