@@ -18,7 +18,6 @@ a {
 }
 .btn-admin {
     border-width: 0;
-    margin-right: 10px;
 }
 .btn-admin:focus {
     box-shadow: none;
