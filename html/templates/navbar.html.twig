@@ -12,6 +12,19 @@
             <li class="nav-item">
                 <span class="navbar-text">{{ app.user.username }}</span>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <div class="dropdown">
+                    <button class="btn nav-link dropdown-toggle btn-admin" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('addTag') }}">Ajouter une categorie</a>
+                        <a class="dropdown-item" href="{{ path('addConference') }}">Ajouter une conférence</a>
+                    </div>
+                </div>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
             </li>
