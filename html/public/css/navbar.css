@@ -15,3 +15,6 @@ a {
     width: 40px;
     margin-left: 10px;
 }
+.navbar-text {
+    margin-right: 10px;
+}
