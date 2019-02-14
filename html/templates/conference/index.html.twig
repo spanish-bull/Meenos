@@ -8,8 +8,9 @@
 {% block body %}
     <div class="container">
 
-        <h1 class="mb-4">{{ conference.title }}</h1>
+        <h1 class="mb-4">{{ conference.title }} {{ rating.rating }}</h1>
         <div class="d-flex bd-highlight justify-content-between mb-3">
+            {{ rating.nmbUser }} personnes on voté
             <div>{{ conference.date | date }}</div>
             {% if conference.address is not null %}
                 <div>{{ conference.address }}</div>
