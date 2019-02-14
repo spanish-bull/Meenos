@@ -16,7 +16,8 @@ input, button {
 /*Container*/
 .container {
     background: white;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     box-shadow: 0 0 120px rgba(0, 0, 0,0.4);
     padding : 100px 30px;
 }
