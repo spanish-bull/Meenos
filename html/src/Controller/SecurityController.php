@@ -69,7 +69,6 @@ class SecurityController extends AbstractController
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
             }
-            $conference->setTags($form->get('tags')->getData());
             $conference->setImage($fileName);
 
             $entityManager = $this->getDoctrine()->getManager();
