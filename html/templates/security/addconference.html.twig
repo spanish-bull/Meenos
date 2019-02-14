@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block title %}Ajouter une conference {% endblock %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.content) }}
-    {{ form_row(form.summary) }}
+    <div class="container">
+    {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
+    {{ form_row(form.title, {'attr':{'class':'form-control'}}) }}
+    {{ form_row(form.content, {'attr':{'class':'form-control'}}) }}
+    {{ form_row(form.summary, {'attr':{'class':'form-control'}}) }}
     {{ form_row(form.image) }}
-    {{ form_row(form.address) }}
+    {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
     {{ form_row(form.date) }}
-    {{ form_row(form.tags) }}
-    {{ form_row(form.submit) }}
+    {{ form_row(form.tags, {'attr':{'class':'selectpicker', 'multiple':'multiple'}}) }}
+    {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
     {{ form_end(form) }}
+    </div>
 {% endblock %}
