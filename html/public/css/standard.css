@@ -6,11 +6,52 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--mn-red);
 }
+input, button {
+    border-radius:50px !important;
+}
+.title_form {
+    text-align: center;
+    margin-bottom:50px;
+}
+/*Container*/
 .container {
     background: white;
     height: 100vh;
     box-shadow: 0 0 120px rgba(0, 0, 0,0.4);
-    padding-top: 100px;
-    padding-right: 30px;
-    padding-left: 30px;
+    padding : 100px 30px;
+}
+
+.container form input{
+    width:100%;
+}
+.container form label{
+    margin-top:20px;
+}
+.container button {
+    margin:40px 33% 0px 33%;
+    width: 34%;
+}
+/*Fin Container*/
+
+/*Standard : bouton*/
+.btn-outline-success {
+    color: var(--mn-red);
+    border-color: var(--mn-red) !important;
+}
+.btn-outline-success:hover {
+    background-color: var(--mn-red) !important;
+    border-color: var(--mn-red) !important;
+}
+.btn-outline-success:active {
+    background-color: var(--mn-red) !important;
+    border-color: var(--mn-red) !important;
+}
+.btn-outline-success:focus {
+    box-shadow: 0 0 0 0.2rem rgba(167, 40, 40, 0.5) !important;
+}
+/*Fin Standard : bouton*/
+/*Standard : input*/
+.form-control:focus{
+    border-color: var(--mn-red) !important;
+    box-shadow : 0 0 1px var(--mn-red) !important;
 }

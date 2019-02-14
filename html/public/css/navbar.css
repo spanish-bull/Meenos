@@ -15,18 +15,3 @@ a {
     width: 40px;
     margin-left: 10px;
 }
-.btn-outline-success {
-    color: var(--mn-red);
-    border-color: var(--mn-red) !important;
-}
-.btn-outline-success:hover {
-    background-color: var(--mn-red) !important;
-    border-color: var(--mn-red) !important;
-}
-.btn-outline-success:active {
-    background-color: var(--mn-red) !important;
-    border-color: var(--mn-red) !important;
-}
-.btn-outline-success:focus {
-    box-shadow: 0 0 0 0.2rem rgba(167, 40, 40, 0.5) !important;
-}
