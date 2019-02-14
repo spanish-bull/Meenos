@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="container">
+        <h1 class="title_form">Se Connecter</h1>
         {{ form_start(form, {'attr':{'class':'col-lg-4 offset-lg-4'}}) }}
         {{ form_errors(form) }}
         {{ form_label(form.username) }}
@@ -14,10 +15,9 @@
         {{ form_help(form.password) }}
 
         {{ form_label(form.submit) }}
-        {{ form_widget(form.submit) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
 
         {{ form_end(form) }}</div>
 
 
 {% endblock %}
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('/css/login.css') }}">{% endblock %}

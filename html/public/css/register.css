@@ -1,14 +1,15 @@
-form div{
-    border-bottom: 1px grey solid;
-    padding: 10px 0 15px 0;
-}
 form div input{
     width:100%;
 }
+form label{
+    margin-top:10px;
+}
+
 #register_user_submit {
     background-color: #C8071A;
-    color: white;
-    border: 1px #C8071A solid;
-    border-radius: 10px;
-    margin: 0 40%;
+    color:white;
+    border:1px #C8071A solid;
+    border-radius:10px;
+    margin:0 33%;
+    width: 34%;
 }

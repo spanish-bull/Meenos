@@ -2,15 +2,15 @@
 {% block title %}Inscription {% endblock %}
 {% block body %}
    <div class="container">
+      <h1 class="title_form">Inscription</h1>
       {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
-      {{ form_row(form.email) }}
-      {{ form_row(form.username) }}
-      {{ form_row(form.firstname) }}
-      {{ form_row(form.lastname) }}
-      {{ form_row(form.password.first) }}
-      {{ form_row(form.password.second) }}
-      {{ form_row(form.submit) }}
+      {{ form_row(form.email, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.username, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.firstname, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.lastname, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.password.first, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.password.second, {'attr':{'class':'form-control'}}) }}
+      {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
       {{ form_end(form) }}
    </div>
 {% endblock %}
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('/css/register.css') }}">{% endblock %}
