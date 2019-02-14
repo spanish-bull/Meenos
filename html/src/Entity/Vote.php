@@ -39,6 +39,7 @@ class Vote
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="vote")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $conference;
 
