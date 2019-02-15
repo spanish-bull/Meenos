@@ -13,7 +13,14 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating')
+            ->add('rating', ChoiceType::class, [
+                'choices'  => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ],])
             ->add('comment')
             ->add('submit', SubmitType::class)
         ;
