@@ -46,3 +46,6 @@ div.modal-review__rating-order-wrap[class]:hover > span {
 div.modal-review__rating-order-wrap[class] > span:hover ~ span {
     background-position: 0px 0px;    /* gray star */
 }
+#star{
+    margin: 0 18%;
+}
