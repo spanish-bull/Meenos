@@ -22,11 +22,11 @@
             </li>
             {% else %}
             <li class="page-item">
-                <a class="page-link" href="{{ page-1 }}" >Previous</a>
+                <a class="page-link" href="{{ path('home_page', {'page': page-1}) }}" >Previous</a>
             </li>
             {% endif %}
             {% for i in 1..nbPage %}
-            <li class="page-item"><a class="page-link" href="{{ i }}">{{ i }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ path('home_page', {'page': i}) }}">{{ i }}</a></li>
 {% endfor %}
             {%  if page == nbPage %}
             <li class="page-item disabled">
@@ -34,7 +34,7 @@
             </li>
             {% else %}
             <li class="page-item">
-                <a class="page-link" href="{{ page+1 }}">Next</a>
+                <a class="page-link" href="{{ path('home_page', {'page': page+1}) }}">Next</a>
             </li>
             {% endif %}
         </ul>

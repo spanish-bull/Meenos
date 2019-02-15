@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Vote;
 use App\Form\VoteType;
+use App\Manager\ConferenceManager;
 use App\Manager\VoteManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class ConferenceController extends AbstractController
     {
 
         $voteConference = $voteManager->searchVoteByIdConference($conference);
-        $rating= $voteManager->ratings($conference);
+        $rating = $voteManager->ratings($conference);
         $render = ['conference' => $conference, 'votes' => $voteConference, 'rating' => $rating];
 
         $vote = new Vote();
@@ -42,6 +43,29 @@ class ConferenceController extends AbstractController
                 }
             }
         }
-            return $this->render('conference/index.html.twig', $render);
-        }
+        return $this->render('conference/index.html.twig', $render);
     }
+
+    /**
+     * @Route("/conferencevoted", name="conference_voted")
+     */
+    public function conferenceVoted(ConferenceManager $conferenceManager)
+    {
+
+        $pageConf=$conferenceManager->conferenceVoteExist();
+        return $this->render('conference/conferencevoted.html.twig', [
+            'conferences' => $pageConf,
+        ]);
+    }
+    /**
+     * @Route("/conferencenotvoted", name="conference_notvoted")
+     */
+    public function conferenceNotVoted(ConferenceManager $conferenceManager)
+    {
+
+        $pageConf=$conferenceManager->conferenceVoteNotExist();
+        return $this->render('conference/conferencenotvoted.html.twig', [
+            'conferences' => $pageConf,
+        ]);
+    }
+}

@@ -3,7 +3,7 @@ App\Entity\Conference:
     title: <text(30)>
     content: <text()>
     summary: <text()>
-    image: <image()>
+    image: '43f83551b3c53138c197f35dc78c4dfa.jpeg'
     address: <address()>
     date: <dateTime()>
 App\Entity\User:
