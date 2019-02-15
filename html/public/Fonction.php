@@ -37,18 +37,25 @@
         //replace 5 par param notation (pour plus tard)
 
         //Ajout du nombre d'etoile pour le vote//
+        function change_val(id_star){
+            var val = id_star;
+            $('#vote_rating').val(val);
+        }
+
         function add_form_star(max_rate){
             var content = "";
             for (var i=1; i<=max_rate; i++){
-                content = content+"<span data-rating-value='"+i+"' onclick='javascript:update_vote(id_conf, id_user, "+i+")'></span>"
+                content = content+"<span data-rating-value='"+i+"' onclick='change_val("+i+")'></span>"
             }
             document.getElementById("form_test").innerHTML=content;
+
         }
+
     </script>
     <!-- Style pour les hover_star-->
     <style>
         /* Initial state */
-        form.modal-review__rating-order-wrap > span {
+        div.modal-review__rating-order-wrap > span {
             display: block; float: left;
             height: 30px; width: 40px;
             background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='30'%3E%3Cpath%20d='M17.5,12.5h-8.5l6.8,5-2.6,8.1,6.8-5,6.8,5-2.6-8.1,6.8-5h-8.5l-2.6-8.1z'%20fill='%23c0c0c0'%20stroke='%23c0c0c0'/%3E%3Cpath%20d='M57.5,12.5h-8.5l6.8,5-2.6,8.1,6.8-5,6.8,5-2.6-8.1,6.8-5h-8.5l-2.6-8.1z'%20fill='%23c8071a'%20stroke='%23c8071a'/%3E%3C/svg%3E");
@@ -56,18 +63,18 @@
         }
 
         /* Persistent state */
-        form.modal-review__rating-order-wrap[data-rating-value] > span {
+        div.modal-review__rating-order-wrap[data-rating-value] > span {
             background-position: -40px 0px;  /* gold star */
         }
-        form.modal-review__rating-order-wrap > span.active ~ span {
+        div.modal-review__rating-order-wrap > span.active ~ span {
             background-position: 0px 0px;    /* gray star */
         }
 
         /* Hover state */
-        form.modal-review__rating-order-wrap[class]:hover > span {
+        div.modal-review__rating-order-wrap[class]:hover > span {
             background-position: -40px 0px;  /* gold star */
         }
-        form.modal-review__rating-order-wrap[class] > span:hover ~ span {
+        div.modal-review__rating-order-wrap[class] > span:hover ~ span {
             background-position: 0px 0px;    /* gray star */
         }
 
@@ -78,7 +85,9 @@
     <!-- affichage des résultats-->
     <div id="test"></div>
     <!-- formulaire de vote-->
-    <form id ="form_test" class="modal-review__rating-order-wrap">
+    <form id ="form_test_" class="modal-review__rating-order-wrap">
+        <input type="hidden" id="vote_rating">
+        <div id="form_test" class="modal-review__rating-order-wrap"></div>
     </form>
 </main>
 </body>
