@@ -1,0 +1,22 @@
+App\Entity\Conference:
+  conference_{1..50}:
+    title: <text(30)>
+    content: <text()>
+    summary: <text()>
+    image: <image()>
+    address: <address()>
+    date: <dateTime()>
+App\Entity\User:
+  user_{1..50}:
+    username: <userName()>
+    firstname: <firstName()>
+    lastname: <lastName()>
+    email: <email()>
+    password: <password()>
+App\Entity\vote:
+  vote_{1..500}:
+    rating: <numberBetween(1, 5)>
+    comment: <text()>
+    conference: '@conference*'
+    user: '@user*'
+

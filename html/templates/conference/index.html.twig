@@ -8,8 +8,9 @@
 {% block body %}
     <div class="container">
         <div>
-            <h1 class="mb-4">{{ conference.title }}</h1>
+            <h1 class="mb-4">{{ conference.title }} {{ rating.rating }}</h1>
             <div class="d-flex bd-highlight justify-content-between mb-3">
+                {{ rating.nmbUser }} personnes on voté
                 <div>{{ conference.date | date }}</div>
                 {% if conference.address is not null %}
                     <div>{{ conference.address }}</div>
@@ -26,10 +27,10 @@
         </div>
         <div>
             {% for vote in votes %}
-
-                {{ vote.rating }}
-                {{ vote.comment }}
-
+                <div class="row">
+                  {{ vote.rating }}
+                  {{ vote.comment }}
+               </div>
             {% endfor %}
             {% if form is defined %}
             {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
@@ -40,6 +41,4 @@
             {% endif %}
         </div>
     </div>
-
-
 {% endblock %}

@@ -18,28 +18,30 @@ class ConferenceController extends AbstractController
      * @param Conference $conference
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Conference $conference, request $request,VoteManager $voteManager)
+    public function index(Conference $conference, request $request, VoteManager $voteManager)
     {
 
-        $voteConference=$voteManager->searchVoteByIdConference($conference);
-        $render= [ 'conference' => $conference,'votes' => $voteConference];
+        $voteConference = $voteManager->searchVoteByIdConference($conference);
+        $rating= $voteManager->ratings($conference);
+        $render = ['conference' => $conference, 'votes' => $voteConference, 'rating' => $rating];
 
-        $vote=new Vote();
-        $user = $this->getUser();
-        if (empty($voteManager->searchUserAsAlreadyVoteConference($conference, $user)))
-        {
-        $form = $this->createForm(VoteType::class,$vote);
-        $form->handleRequest($request);
-        $render += ['form' => $form->createView()];
-        if ($form->isSubmitted() && $form->isValid()) {
-            $vote->setUser($user);
-            $vote->setConference($conference);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($vote);
-            $entityManager->flush();
-            return $this->redirectToRoute('conference_page',['id' => $conference->getId() ] );
+        $vote = new Vote();
+        if (!empty($this->getUser())) {
+            $user = $this->getUser();
+            if (empty($voteManager->searchUserAsAlreadyVoteConference($conference, $user))) {
+                $form = $this->createForm(VoteType::class, $vote);
+                $form->handleRequest($request);
+                $render += ['form' => $form->createView()];
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $vote->setUser($user);
+                    $vote->setConference($conference);
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($vote);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('conference_page', ['id' => $conference->getId()]);
+                }
+            }
         }
+            return $this->render('conference/index.html.twig', $render);
         }
-        return $this->render('conference/index.html.twig', $render);
     }
-}
