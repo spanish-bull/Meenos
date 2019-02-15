@@ -22,6 +22,9 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -38,8 +41,11 @@ class SecurityController extends AbstractController
         }
         return $this->render('security/register.html.twig', ['form' => $form->createView()]);
     }
+
     /**
      * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -47,9 +53,12 @@ class SecurityController extends AbstractController
         $form = $this->createForm(LoginUserType::class, $user);
         return $this->render('security/login.html.twig', ['error' => $authenticationUtils->getLastAuthenticationError(), 'form' => $form->createView()]);
     }
+
     /**
-    * @Route("/admin/addconference", name="addConference")
-    */
+     * @Route("/admin/addconference", name="addConference")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addConference(Request $request)
     {
         $conference = new Conference();
@@ -80,8 +89,11 @@ class SecurityController extends AbstractController
         return $this->render('security/addconference.html.twig', ['form' => $form->createView()]);
 
     }
+
     /**
      * @Route("/admin/addtag", name="addTag")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addTag(Request $request)
     {

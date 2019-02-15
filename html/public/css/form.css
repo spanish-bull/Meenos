@@ -1,0 +1,12 @@
+#add_conference_date {
+    display: flex;
+    justify-content: space-between;
+}
+#add_conference_tags {
+    width: -webkit-fill-available;
+}
+select {
+    border-radius: 6px;
+    padding: 2px 6px;
+    background: white;
+}
