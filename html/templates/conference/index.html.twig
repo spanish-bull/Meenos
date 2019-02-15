@@ -19,7 +19,7 @@
         </div>
         {% if conference.image is not null %}
             <div class="floated">
-                <img src="{{ conference.image }}"/>
+                <img src="{{ asset('/images/' ~ conference.image )}}"/>
             </div>
         {% endif %}
         <p>{{ conference.content }}</p>
