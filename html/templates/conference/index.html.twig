@@ -6,16 +6,16 @@
 {% block title %}{{ conference.title }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div>
-            <h1 class="mb-4">{{ conference.title }} {{ rating.rating }}</h1>
-            <div class="d-flex bd-highlight justify-content-between mb-3">
-                {{ rating.nmbUser }} personnes on voté
-                <div>{{ conference.date | date }}</div>
+    <div class="container d-flex flex-column">
+        <div class="mb-5 pl-5 pr-5">
+            <h1 class="mb-5">{{ conference.title }}</h1>
+            <div class="d-flex bd-highlight justify-content-between mb-4">
+                <div class="col-md-4 pl-0">{{ rating.nmbUser }} personnes ont voté</div>
+                <div class="col-md-4 text-center">{{ conference.date | date }}</div>
                 {% if conference.address is not null %}
-                    <div>{{ conference.address }}</div>
+                    <div class="col-md-4 text-right">{{ conference.address }}</div>
                 {% else %}
-                    <div>Le lieu n'est pas encore définis...</div>
+                    <div class="col-md-4 text-right">Le lieu n'est pas encore définis...</div>
                 {% endif %}
             </div>
             {% if conference.image is not null %}
@@ -25,20 +25,36 @@
             {% endif %}
             <p>{{ conference.content }}</p>
         </div>
-        <div>
+        <div class="separator mb-5"></div>
+        <div class="mb-5 pl-5 pr-5">
+            <h3 class="mb-5">Notes</h3>
+            <div class="row pl-5 pr-5">
+            {% if votes is same as([])%}
+            <h4>Il n'y a aucune note...</h4>
+            {% else %}
             {% for vote in votes %}
-                <div class="row">
-                  {{ vote.rating }}
-                  {{ vote.comment }}
-               </div>
+                <div class="comment d-flex mb-3">
+                    <div class="col-md-2 mr-3 star">{{ vote.rating }}</div>
+                    <div class="col-md-10 mr-3">
+                        {% if vote.comment is null %}
+                        <i>Aucun commentaire...</i>
+                        {% else %}
+                        {{ vote.comment }}
+                        {% endif %}
+                    </div>
+                </div>
             {% endfor %}
-            {% if form is defined %}
+            {% endif %}
+            </div>
+        </div>
+        {% if form is defined %}
+        <div>
             {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
             {{ form_row(form.rating, {'attr':{'class':'form-control'}}) }}
             {{ form_row(form.comment, {'attr':{'class':'form-control'}}) }}
             {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
             {{ form_end(form) }}
-            {% endif %}
         </div>
+        {% endif %}
     </div>
 {% endblock %}
