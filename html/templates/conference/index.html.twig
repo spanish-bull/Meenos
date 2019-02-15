@@ -8,7 +8,7 @@
 {% block body %}
     <div class="container">
         <div>
-            <h1 class="mb-4">{{ conference.title }} {{ rating.rating }}</h1>
+            <h1 class="mb-4">{{ conference.title }} <span id="rate"></span></h1>
             <div class="d-flex bd-highlight justify-content-between mb-3">
                 {{ rating.nmbUser }} personnes on voté
                 <div>{{ conference.date | date }}</div>
@@ -28,7 +28,7 @@
         <div>
             {% for vote in votes %}
                 <div class="row">
-                  {{ vote.rating }}
+                    <span id="{{ vote.id }}"></span>
                   {{ vote.comment }}
                </div>
             {% endfor %}
@@ -41,4 +41,38 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    function generate_star_rating(rate, name_of_id,){
+        var entier = Math.trunc(rate);
+        var decimal = rate - entier;
+
+        var content = "";
+        for (var i = 1; i<= entier; i++){
+            content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+        }
+        if (entier < 5){
+            if (decimal <0.25){
+                content = content+"<i class='far fa-star' style='color:grey'></i>"
+            }
+            if (decimal <0.75 && decimal >= 0.25){
+                content = content+"<i class='fas fa-star-half-alt' style='color:#c8071a'></i>"
+            }
+            if (decimal >= 0.75){
+                content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+            }
+        }
+        for (var i = 1; i< 5 - entier; i++){
+            content = content+"<i class='far fa-star' style='color:grey'></i>"
+        }
+        document.getElementById(name_of_id).innerHTML=content;
+
+    };
+
+generate_star_rating({{ rating.rating }}, 'rate')
+{% for vote in votes %}
+    generate_star_rating({{ vote.rating }}, {{ vote.id }})
+{% endfor %}
+</script>
 {% endblock %}

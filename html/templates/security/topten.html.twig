@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Inscription {% endblock %}
 {% block body %}
-    <table class="table">
+    <div class="container"><table class="table">
         <thead>
         <tr>
             <th scope="col">Note</th>
@@ -13,7 +13,7 @@
         <tbody>
         {% for conf in topten %}
             <tr>
-                <th scope="row">  {{ conf.rating }}</th>
+                <th scope="row">  {{ conf.rating|number_format(2, '.', ',') }}</th>
                 <td><a href="{{ path('conference_page', {'id': conf.id_conf}) }}">{{ conf.titleConf }}</a></td>
                 <td>  {{ conf.DateConf }} </td>
                 <td>{{ conf.nmbUser }}</td>
@@ -21,4 +21,5 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}
