@@ -23,7 +23,7 @@ class HomeController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{page}", name="home_page")
+     * @Route("/page/{page}", name="home_page")
      */
     public function pagination(ConferenceManager $conferenceManager, $page)
     {

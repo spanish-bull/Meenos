@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meenos{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for conference in conferences %}
+            <div class="row">
+                {{ conference.title }}
+                {{ conference.date }}
+                {{ conference.summary }}
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}
