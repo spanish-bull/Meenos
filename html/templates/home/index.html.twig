@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-8 text-right">
                 <p>{{ conference.summary }}</p>
-                <p>//Rajouter les étoiles here</p>
+                <div class="star"><span id="{{ conference.id }}"></span></div>
             </div>
         </div>
     </div>
@@ -54,4 +54,59 @@
 
 
 </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function generate_star_rating(rate, name_of_id,){
+            var entier = Math.trunc(rate);
+            var decimal = rate - entier;
+
+            var content = "";
+            for (var i = 1; i<= entier; i++){
+                content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+            }
+            if (entier < 5){
+                if (decimal <0.25){
+                    content = content+"<i class='far fa-star' style='color:grey'></i>"
+                }
+                if (decimal <0.75 && decimal >= 0.25){
+                    content = content+"<i class='fas fa-star-half-alt' style='color:#c8071a'></i>"
+                }
+                if (decimal >= 0.75){
+                    content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+                }
+            }
+            for (var i = 1; i< 5 - entier; i++){
+                content = content+"<i class='far fa-star' style='color:grey'></i>"
+            }
+            document.getElementById(name_of_id).innerHTML=content;
+
+        };
+        function change_val(id_star){
+            var val = id_star;
+            $('#vote_rating').val(val);
+        }
+
+        function add_form_star(max_rate){
+            var content = "";
+            for (var i=1; i<=max_rate; i++){
+                content = content+"<span data-rating-value='"+i+"' onclick='change_val("+i+")'></span>"
+            }
+            document.getElementById("star").innerHTML=content;
+
+        }
+
+
+
+        {% for conference in conferences %}
+        generate_star_rating({{ conference.rating }}, {{ conference.id }})
+        {% endfor %}
+
+        add_form_star(5);
+        $('.modal-review__rating-order-wrap > span').click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).parent().attr('data-rating-value', $(this).data('rating-value'));
+        });
+    </script>
+
 {% endblock %}
