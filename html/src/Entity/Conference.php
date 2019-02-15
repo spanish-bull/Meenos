@@ -63,7 +63,7 @@ class Conference
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference")
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference",cascade={"remove"})
      */
     private $vote;
 

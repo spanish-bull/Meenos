@@ -69,7 +69,22 @@ class ConferenceManager
         return $qb->getQuery()->execute();
 
     }
+    public function allConference()
+    {
+        $qb = $this->conferenceRepository->createQueryBuilder('c');
+        $qb->select('(c.title) as title, (c.summary) as summary, (c.date) as date, (c.image) as image,(c.content) as content, (c.id) as id')
 
+            ->join('c.vote', 'v')
+            ->addSelect('AVG(v.rating) as rating','COUNT(v.id) as nmbUser')
+            ->groupBy('c')
+            ->orderBy('c.date', 'DESC')
+            ;
+        return $qb->getQuery()->execute();
+    }
+    public function findById(int $id)
+    {
+        return $this->conferenceRepository->findOneBy(['id' => $id]);
+    }
 
 
 }
