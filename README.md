@@ -28,7 +28,7 @@ docker-compose run composer composer install
 http://localhost/
 
 **Adminer :**
-git pu
+http://localhost:8080/
 
 **Mailhog :**
 http://localhost:8025/
