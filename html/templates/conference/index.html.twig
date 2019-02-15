@@ -1,25 +1,118 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('/css/conference.css') }}">{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/conference.css') }}">{% endblock %}
 
 {% block title %}{{ conference.title }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="mb-4">{{ conference.title }}</h1>
-    <div class="d-flex bd-highlight justify-content-between mb-3">
-        <div>{{ conference.date | date }}</div>
-        {% if conference.address is not null %}
-            <div>{{ conference.address }}</div>
-        {% else %}
-            <div>Le lieu n'est pas encore définis...</div>
+    <div class="container d-flex flex-column">
+        <div class="mb-5 pl-5 pr-5">
+            <h1 class="mb-5">{{ conference.title }}</h1>
+            <div class="d-flex bd-highlight justify-content-between mb-4">
+                <div class="col-md-4 pl-0">{{ rating.nmbUser }} personnes ont voté</div>
+                <div class="col-md-4 text-center">{{ conference.date | date }}</div>
+                {% if conference.address is not null %}
+                    <div class="col-md-4 text-right">{{ conference.address }}</div>
+                {% else %}
+                    <div class="col-md-4 text-right">Le lieu n'est pas encore définis...</div>
+                {% endif %}
+            </div>
+            {% if conference.image is not null %}
+                <div class="floated">
+                    <img src="{{ asset('/images/' ~ conference.image )}}"/>
+                </div>
+            {% endif %}
+            <p>{{ conference.content }}</p>
+            Note : <span id="rate"></span>
+        </div>
+        <div class="separator mb-5"></div>
+        <div class="mb-5 pl-5 pr-5">
+            <h3 class="mb-5">Notes</h3>
+            <div class="row pl-5 pr-5">
+            {% if votes is same as([])%}
+            <h4>Il n'y a aucune note...</h4>
+            {% else %}
+            {% for vote in votes %}
+                <div class="comment d-flex mb-3">
+                    <div class="col-md-2 mr-3 star"><span id="{{ vote.id }}"></span></div>
+                    <div class="col-md-10 mr-3">
+                        {% if vote.comment is null %}
+                        <i>Aucun commentaire...</i>
+                        {% else %}
+                        {{ vote.comment }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+        {% if form is defined %}
+        <div>
+            {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
+            {{ form_row(form.rating, {'attr':{'class':'form-control'}}) }}
+            <div id="star" class="modal-review__rating-order-wrap"></div>
+            {{ form_row(form.comment, {'attr':{'class':'form-control'}}) }}
+            {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
+            {{ form_end(form) }}
+        </div>
+
         {% endif %}
     </div>
-    {% if conference.image is not null %}
-    <div class="floated">
-        <img src="{{ conference.image }}"/>
-    </div>
-    {% endif %}
-    <p>{{ conference.content }}</p>
-</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function generate_star_rating(rate, name_of_id,){
+            var entier = Math.trunc(rate);
+            var decimal = rate - entier;
+
+            var content = "";
+            for (var i = 1; i<= entier; i++){
+                content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+            }
+            if (entier < 5){
+                if (decimal <0.25){
+                    content = content+"<i class='far fa-star' style='color:grey'></i>"
+                }
+                if (decimal <0.75 && decimal >= 0.25){
+                    content = content+"<i class='fas fa-star-half-alt' style='color:#c8071a'></i>"
+                }
+                if (decimal >= 0.75){
+                    content = content+"<i class='fas fa-star' style='color:#c8071a'></i>"
+                }
+            }
+            for (var i = 1; i< 5 - entier; i++){
+                content = content+"<i class='far fa-star' style='color:grey'></i>"
+            }
+            document.getElementById(name_of_id).innerHTML=content;
+
+        };
+        function change_val(id_star){
+            var val = id_star;
+            $('#vote_rating').val(val);
+        }
+
+        function add_form_star(max_rate){
+            var content = "";
+            for (var i=1; i<=max_rate; i++){
+                content = content+"<span data-rating-value='"+i+"' onclick='change_val("+i+")'></span>"
+            }
+            document.getElementById("star").innerHTML=content;
+
+        }
+
+
+        generate_star_rating({{ rating.rating }}, 'rate')
+        {% for vote in votes %}
+        generate_star_rating({{ vote.rating }}, {{ vote.id }})
+        {% endfor %}
+
+        add_form_star(5);
+        $('.modal-review__rating-order-wrap > span').click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).parent().attr('data-rating-value', $(this).data('rating-value'));
+        });
+    </script>
+
 {% endblock %}

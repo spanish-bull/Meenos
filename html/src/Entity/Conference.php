@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -36,7 +37,8 @@ class Conference
     private $summary;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     *  @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\File(mimeTypes = {"image/jpeg","image/jpg", "image/gif", "image/png"})
      */
     private $image;
 
@@ -52,14 +54,19 @@ class Conference
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="Conference")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
+     * @ORM\JoinTable(name="tag_conference",
+     *      joinColumns={@JoinColumn(name="conference_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")}
+     *      )
      */
     private $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Vote", mappedBy="conference")
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference",cascade={"remove"})
      */
     private $vote;
+
 
     public function __construct()
     {
@@ -151,7 +158,11 @@ class Conference
     {
         return $this->tags;
     }
-
+    public function setTags($tags): self
+    {
+        $this->addTag($tags);
+        return $this;
+    }
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -172,6 +183,7 @@ class Conference
         return $this;
     }
 
+
     /**
      * @return Collection|Vote[]
      */
@@ -180,21 +192,11 @@ class Conference
         return $this->vote;
     }
 
-    public function addvote(Vote $vote): self
+    public function addVote(Vote $vote): self
     {
         if (!$this->vote->contains($vote)) {
             $this->vote[] = $vote;
-            $vote->addConference($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVote(Vote $vote): self
-    {
-        if ($this->vote->contains($vote)) {
-            $this->vote->removeElement($vote);
-            $vote->removeConference($this);
+            $vote->setConference($this);
         }
 
         return $this;

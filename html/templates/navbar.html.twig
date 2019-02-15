@@ -21,10 +21,21 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{ path('addTag') }}">Ajouter une categorie</a>
                         <a class="dropdown-item" href="{{ path('addConference') }}">Ajouter une conférence</a>
+                        <a class="dropdown-item" href="{{ path('admin_conference') }}">Toutes les conferences</a>
+                        <a class="dropdown-item" href="{{ path('topten') }}">Voir le top 10</a>
                     </div>
                 </div>
             </li>
             {% endif %}
+                <div class="dropdown">
+                    <button class="btn nav-link dropdown-toggle btn-admin" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Conférences
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('conference_voted') }}">Conférences votées</a>
+                        <a class="dropdown-item" href="{{ path('conference_notvoted') }}">Conférences non votées</a>
+                    </div>
+                </div>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
             </li>

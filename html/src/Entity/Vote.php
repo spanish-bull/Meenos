@@ -19,10 +19,6 @@ class Vote
      */
     private $id;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Conference", inversedBy="user")
-     */
-    private $conference;
 
     /**
      * @Assert\NotBlank()
@@ -41,41 +37,20 @@ class Vote
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="vote")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conference;
+
     public function __construct()
     {
-        $this->conference = new ArrayCollection();
         $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Conference[]
-     */
-    public function getConference(): Collection
-    {
-        return $this->conference;
-    }
-
-    public function addConference(Conference $conference): self
-    {
-        if (!$this->conference->contains($conference)) {
-            $this->conference[] = $conference;
-        }
-
-        return $this;
-    }
-
-    public function removeConference(Conference $conference): self
-    {
-        if ($this->conference->contains($conference)) {
-            $this->conference->removeElement($conference);
-        }
-
-        return $this;
     }
 
 
@@ -103,7 +78,7 @@ class Vote
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ArrayCollection
     {
         return $this->user;
     }
@@ -114,4 +89,17 @@ class Vote
 
         return $this;
     }
+
+    public function getConference(): ?Conference
+    {
+        return $this->conference;
+    }
+
+    public function setConference(?Conference $conference): self
+    {
+        $this->conference = $conference;
+
+        return $this;
+    }
 }
+

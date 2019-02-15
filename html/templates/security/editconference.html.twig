@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}editer une conference {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/chosen.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="title_form">editer une nouvelle conférence</h1>
+        {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
+        {{ form_row(form.title, {'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.content, {'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.summary, {'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.address, {'attr':{'class':'form-control'}}) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.tags, {'attr':{'class':'chosen-select'}}) }}
+        {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('/js/chosen.jquery.js') }}" ></script>
+    <script>$(".chosen-select").chosen()</script>
+{% endblock %}

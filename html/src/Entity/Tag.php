@@ -30,10 +30,6 @@ class Tag
      */
     private $description;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Conference", inversedBy="tags")
-     */
-    private $Conference;
 
     public function __construct()
     {
