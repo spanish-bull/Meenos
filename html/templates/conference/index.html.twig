@@ -51,6 +51,7 @@
         <div>
             {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
             {{ form_row(form.rating, {'attr':{'class':'form-control'}}) }}
+            <div id="star" class="modal-review__rating-order-wrap"></div>
             {{ form_row(form.comment, {'attr':{'class':'form-control'}}) }}
             {{ form_row(form.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
             {{ form_end(form) }}
@@ -86,11 +87,31 @@
             document.getElementById(name_of_id).innerHTML=content;
 
         };
+        function change_val(id_star){
+            var val = id_star;
+            $('#vote_rating').val(val);
+        }
+
+        function add_form_star(max_rate){
+            var content = "";
+            for (var i=1; i<=max_rate; i++){
+                content = content+"<span data-rating-value='"+i+"' onclick='change_val("+i+")'></span>"
+            }
+            document.getElementById("star").innerHTML=content;
+
+        }
+
 
         generate_star_rating({{ rating.rating }}, 'rate')
         {% for vote in votes %}
         generate_star_rating({{ vote.rating }}, {{ vote.id }})
         {% endfor %}
+
+        add_form_star(5);
+        $('.modal-review__rating-order-wrap > span').click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).parent().attr('data-rating-value', $(this).data('rating-value'));
+        });
     </script>
 
 {% endblock %}
