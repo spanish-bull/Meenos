@@ -46,4 +46,19 @@ class VoteManager
 
     }
 
+    public function topTenRatings()
+    {
+        $qb = $this->voteRepository->createQueryBuilder('v');
+
+        $qb->select('AVG(v.rating) as rating','COUNT(v.id) as nmbUser')
+            ->join('v.conference', 'c')
+            ->addSelect('(c) as id_conf, (c.title) as titleConf, (c.date) as DateConf')
+            ->groupBy('id_conf')
+            ->orderBy('rating', 'DESC')
+            ->setMaxResults(10)
+        ;
+       return $resultat = $qb->getQuery()->execute();
+
+    }
+
 }

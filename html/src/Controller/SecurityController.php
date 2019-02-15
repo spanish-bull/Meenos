@@ -9,6 +9,7 @@ use App\Form\AddConferenceType;
 use App\Form\AddTagType;
 use App\Form\LoginUserType;
 use App\Form\RegisterUserType;
+use App\Manager\VoteManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,6 +96,16 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->render('security/addTag.html.twig', ['form' => $form->createView()]);
+
+    }
+    /**
+     * @Route("/admin/topten", name="topten")
+     */
+    public function topTen(VoteManager $voteManager)
+    {
+        $toptenrating = $voteManager->topTenRatings();
+
+        return $this->render('security/topten.html.twig', ['topten' => $toptenrating]);
 
     }
     /**

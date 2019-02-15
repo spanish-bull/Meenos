@@ -26,10 +26,10 @@
         <p>{{ conference.content }}</p>
 
         {% for vote in votes %}
-
+         <div class="row">
             {{ vote.rating }}
             {{ vote.comment }}
-
+         </div>
         {% endfor %}
         {% if form is defined %}
         {{ form_start(form, {'attr': {'class':'col-lg-4 offset-lg-4'}}) }}
