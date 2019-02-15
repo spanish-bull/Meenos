@@ -8,7 +8,7 @@
 {% block body %}
     <div class="container d-flex flex-column">
         <div class="mb-5 pl-5 pr-5">
-            <h1 class="mb-5">{{ conference.title }} <span id="rate"></span></h1>
+            <h1 class="mb-5">{{ conference.title }}</h1>
             <div class="d-flex bd-highlight justify-content-between mb-4">
                 <div class="col-md-4 pl-0">{{ rating.nmbUser }} personnes ont voté</div>
                 <div class="col-md-4 text-center">{{ conference.date | date }}</div>
@@ -24,6 +24,7 @@
                 </div>
             {% endif %}
             <p>{{ conference.content }}</p>
+            Note : <span id="rate"></span>
         </div>
         <div class="separator mb-5"></div>
         <div class="mb-5 pl-5 pr-5">
