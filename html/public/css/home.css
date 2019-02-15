@@ -1,0 +1,20 @@
+.home-container {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.conf-img {
+    max-height: 200px;
+}
+.conf-min {
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    padding: 25px;
+}
+.title-link {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+.title-link:hover {
+    color: var(--mn-red);
+}

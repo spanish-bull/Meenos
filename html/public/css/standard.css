@@ -1,7 +1,10 @@
 :root {
     --mn-red: #C8071A;
 }
-
+.separator {
+    border-bottom: 2px solid lightgrey;
+    width: 100%;
+}
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--mn-red);

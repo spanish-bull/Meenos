@@ -5,17 +5,12 @@ img {
     float: left;
     margin: 0 20px 10px 0;
 }
-.separator {
-    border-bottom: 2px solid lightgrey;
-    width: 100%;
-}
 .comment {
     width: 100%;
     padding: 10px;
     border: 1px solid lightgrey;
     border-radius: 15px;
 }
-
 .star {
     border-right: 1px solid var(--mn-red);
 }

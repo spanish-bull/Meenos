@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ConferenceController extends AbstractController
 {
     /**
-     * @Route("/conference/{id}", name="conference_page")
+     * @Route("/conference/{id}", name="conference")
      * @param Conference $conference
      * @return \Symfony\Component\HttpFoundation\Response
      */
