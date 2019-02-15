@@ -1,4 +1,48 @@
+img {
+    max-height: 450px;
+}
 .floated {
     float: left;
     margin: 0 20px 10px 0;
+}
+.separator {
+    border-bottom: 2px solid lightgrey;
+    width: 100%;
+}
+.comment {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+}
+
+.star {
+    border-right: 1px solid var(--mn-red);
+}
+.floated {
+    float: left;
+    margin: 0 20px 10px 0;
+}
+/* Initial state */
+form.modal-review__rating-order-wrap > span {
+    display: block; float: left;
+    height: 30px; width: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='30'%3E%3Cpath%20d='M17.5,12.5h-8.5l6.8,5-2.6,8.1,6.8-5,6.8,5-2.6-8.1,6.8-5h-8.5l-2.6-8.1z'%20fill='%23c0c0c0'%20stroke='%23c0c0c0'/%3E%3Cpath%20d='M57.5,12.5h-8.5l6.8,5-2.6,8.1,6.8-5,6.8,5-2.6-8.1,6.8-5h-8.5l-2.6-8.1z'%20fill='%23c8071a'%20stroke='%23c8071a'/%3E%3C/svg%3E");
+    background-position: 0px 0px;    /* gray star */
+}
+
+/* Persistent state */
+form.modal-review__rating-order-wrap[data-rating-value] > span {
+    background-position: -40px 0px;  /* gold star */
+}
+form.modal-review__rating-order-wrap > span.active ~ span {
+    background-position: 0px 0px;    /* gray star */
+}
+
+/* Hover state */
+form.modal-review__rating-order-wrap[class]:hover > span {
+    background-position: -40px 0px;  /* gold star */
+}
+form.modal-review__rating-order-wrap[class] > span:hover ~ span {
+    background-position: 0px 0px;    /* gray star */
 }
