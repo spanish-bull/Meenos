@@ -16,7 +16,7 @@
         {% for conf in topten %}
             <tr>
                 <th scope="row">  {{ conf.rating }}</th>
-                <td><a href="{{ path('conference_page', {'id': conf.id_conf}) }}">{{ conf.titleConf }}</a></td>
+                <td><a href="{{ path('conference', {'id': conf.id_conf}) }}">{{ conf.titleConf }}</a></td>
                 <td>  {{ conf.DateConf }} </td>
                 <td>{{ conf.nmbUser }}</td>
             </tr>
