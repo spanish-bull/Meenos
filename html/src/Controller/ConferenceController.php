@@ -39,7 +39,7 @@ class ConferenceController extends AbstractController
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($vote);
                     $entityManager->flush();
-                    return $this->redirectToRoute('conference_page', ['id' => $conference->getId()]);
+                    return $this->redirectToRoute('conference', ['id' => $conference->getId()]);
                 }
             }
         }
