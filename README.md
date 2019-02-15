@@ -23,6 +23,15 @@ changez les champs login, pwd, database_name\
 **Etape 3 :**
 docker-compose run composer composer install
 
+**Etape 4 :**
+docker-compose exec php php d:s:u --force
+
+**Etape 5 :**
+docker-compose exec php php bin/console hautelook:fixtures:load
+
+**Etape 6 :**
+docker-compose exec php php bin/console app:create-admin {email} {username} {password}
+
 ## Accès
 **Site :**
 http://localhost/
