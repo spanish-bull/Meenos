@@ -7,9 +7,12 @@ use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\AddConferenceType;
 use App\Form\AddTagType;
+use App\Form\EditConferenceType;
 use App\Form\LoginUserType;
 use App\Form\RegisterUserType;
+use App\Manager\ConferenceManager;
 use App\Manager\VoteManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -119,6 +122,39 @@ class SecurityController extends AbstractController
 
         return $this->render('security/topten.html.twig', ['topten' => $toptenrating]);
 
+    }
+    /**
+     * @Route("/admin/conference", name="admin_conference")
+     */
+    public function allConference(ConferenceManager $conferenceManager)
+    {
+        $conferences = $conferenceManager->allConference();
+
+        return $this->render('security/conference.html.twig', ['conferences' => $conferences]);
+
+    }
+    /** * @Route("/admin/editconference/{id}", name="admin_editconference") */
+    public function userEditVideo(Request $request, EntityManagerInterface $entityManager, int $id,ConferenceManager $conferenceManager)
+    {
+        $video = $conferenceManager->findById($id);
+        $user = $this->getUser();
+        $form = $this->createForm(EditConferenceType::class, $video);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($video);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_conference');
+        }
+        return $this->render('security/editconference.html.twig', ['form' => $form->createView(), 'user' => $user]);
+    }
+    /** * @Route("/admin/removeconference/{id}", name="removeconference") */
+    public function removeVideo(int $id, ConferenceManager $conferenceManager, EntityManagerInterface $entityManager)
+    {
+        $conference = $conferenceManager->findById($id);
+        $entityManager->remove($conference);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_conference');
     }
     /**
      * @return string

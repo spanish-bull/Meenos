@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}conference {% endblock %}
+{% block body %}
+    <div class="container">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Note</th>
+                <th scope="col">Titre de la conference</th>
+                <th scope="col">Date de la conference</th>
+                <th scope="col">Nombre de personne</th>
+                <th scope="col">action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for conf in conferences %}
+                <tr>
+                    <th scope="row">  {{ conf.rating }}</th>
+                    <td><a href="{{ path('conference', {'id': conf.id}) }}">{{ conf.title }}</a></td>
+                    <td>  {{ conf.date }} </td>
+                    <td>{{ conf.nmbUser }}</td>
+                    <td><a class="btn btn-info" href="{{ path('admin_editconference', {'id': conf.id}) }}">editer</a><a class="btn btn-danger" href="{{ path('removeconference', {'id': conf.id}) }}">supprimer</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
